@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to DSGE Modeling</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Harry Li" />
+    <meta name="date" content="2021-06-30" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
+    <link rel="stylesheet" href="mtheme.css" type="text/css" />
+    <link rel="stylesheet" href="fonts_mtheme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to DSGE Modeling
+## FSSR-MRD Teach-in
+### Harry Li
+### Bank of England
+### 2021-06-30
+
+---
+
+
+&lt;script type="text/x-mathjax-config"&gt;
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+&lt;/script&gt;
+
+
+
+# Introduction
+
+**Dynamic Stochastic General Equilibrium (DSGE)**:
+- *Dynamic* - Intertemporal problems and agents rationally form expectations
+- *Stochastic* -  Allow for exogenous stochastic processes such as random shocks
+- *General Equilibrium* - Agents are utility maximising and markets are in equilibrium
+
+### Motivation
+- Popular in macroeconomics research
+- Explaining historical time-series data and for forecasting
+- Widely used by Central Banks
+
+### Aim
+- Introduction to DSGE Modeling
+- Derive simple DSGE models analytically
+
+### Prerequisites
+- Method of Lagrange multipliers
+
+???
+### Motivation
+- DSGE models are widely used in macroeconomic research, for example to explain and predict co-movements of aggregate time series over the business cycle as well as to perform policy analysis. DSGE models are a prominent tool for forecasting at central banks, such as the Bank of England's COMPASS. Therefore, it's useful to understand how these models work.
+
+### Aim
+The aim of this teach-in is to give an introduction to DSGE modeling. At the end of this teach-in, you should be able to derive simple DSGE models analytically. Technical mathematical details are omitted, but useful resources are provided at the end for further reading. 
+
+### Prerequisites
+No prerequisites are required except some basic knowledge of convex optimisation, in particular the method of Lagrangian multipliers is useful.
+---
+
+# Overview
+We focus on models with:
+- Discrete time
+- Infinite Horizon
+- Representative households
+
+.full-width[.content-box-blue[The *representative household* assumption means that all households' preferences are identical. That is, preferences can be represented as if a single household made the aggregate consumption and saving decisions subject to a single budget constraint.]]
+
+???
+The methods for continuous time problems are largely the same but the maths is slightly more complicated when working in continuous time.
+
+The representative household assumption limits us to answering questions pertaining to the aggregate economy. Incorporating heterogeneity allows us to answer questions on distributional impacts. 
+
+---
+# Deterministic Consumption-Saving Problem
+
+Individual household chooses paths for consumption and saving at time `\(t\)` to maximize the discounted sum of utilities
+`$$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \sum_{\tau = t}^{\infty} \beta^{\tau - t} u(c_{\tau})$$`
+subject to the budget constraint for each `\(t\)`:
+`$$c_{t} + s_{t} \leq y_{t} + Rs_{t-1}$$`
+**Assumptions**
+- `\(u'&gt;0, u''&lt;0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
+- `\(s_{t} \geq 0\)` 
+- Constant interest rate `\(R\)`
+- Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{\infty}\)`
+
+We are interested in the equilibrium paths for `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)`.
+
+???
+
+This maximization problem can be solved in a number of ways, for example, by setting up an infinite-dimensional Lagrangian. But the most convenient and common way of approaching it is by solving recursively.
+
+---
+
+# 1. Identifying control and state variables
+
+.full-width[.content-box-blue[**Control variables** are variables that agents choose.]]
+Control variables are usually easy to identify. In this example, the control variables are `\(c_t, s_t\)`.
+
+.full-width[.content-box-blue[**State variables** are:
+- Predetermined - the agent can observe the values for the state variables at time `\(t\)` prior to making a decision.
+- Relevant - the value of state variables affect the agent's choices and utility.
+- Not redundant - the information the state variable contains cannot be summarized in a simpler way.
+]]
+
+State variables are more difficult to identify. In this example, there is an endogenous state variable `\(s_{t-1}\)` and an exogenous state variable `\(y_{t}\)`.
+
+---
+
+# 2. Set-up the Bellman Equation
+Define `\(V(s_{t-1}, y_{t})\)` as the value of the above maximisation given the endogenous state `\(s_{t-1}\)` and exogenous state `\(y_{t}\)`.
+
+$$
+`\begin{align*}
+    V(s_{t-1}, y_{t}) &amp;= \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \sum_{\tau = t}^{\infty} \beta^{\tau-t} u(c_{\tau})  \\
+    &amp;= \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \left\{u(c_{t}) + \beta\sum_{\tau = t+1}^{\infty} \beta^{\tau - (t+1)} u(c_{\tau}) \right\} \\
+    &amp;= \max_{\{c_{t}, s_{t}\}} \left\{u(c_{t}) + \beta \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t+1}^{\infty}} \left\{\sum_{\tau = t+1}^{\infty} \beta^{\tau - (t+1)} u(c_{\tau}) \right\}\right\} \\
+    &amp;= \max_{\{c_{t}, s_{t}\}} \left\{u(c_{t}) + \beta V(s_{t}, y_{t+1}) \right\}
+\end{align*}`
+$$
+where the maximisation is subject to the same date `\(t\)` budget constraint.
+
+---
+# 3. Solving the Bellman Equation
+
+There are two ways to solve the recursive problem. Either
+- Substitute the budget constraint into the Bellman equation to remove one choice variable. Then solve by taking first-order conditions.
+- Set-up a Lagrangian to solve the constrained maximisation problem
+
+Using Lagrangian:
+`$$\mathcal{L} := u(c_{t}) + \beta V(s_{t}, y_{t+1}) + \lambda_{t}[y_{t} + Rs_{t-1} - c_{t} - s_{t}]$$`
+
+Take first order conditions:
+$$
+`\begin{align}
+    \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad &amp; u'(c_{t}) - \lambda_{t} = 0 \label{eq:focc}\\
+    \frac{\partial \mathcal{L}}{\partial s_{t}}: \qquad &amp; \beta \frac{\partial V_{t+1}}{\partial s_{t}} - \lambda_{t} = 0 \label{eq:focs}
+\end{align}`
+$$
+Notation: `\(V_{t} = V(s_{t-1}, y_{t})\)`.
+
+
+---
+# 4. Envelope Conditions
+
+Without proof:
+`$$\frac{\partial V_{t}}{\partial s_{t-1}} = \frac{\partial \mathcal{L}}{\partial s_{t-1}}$$`
+
+That is, when taking the derivative of the objective function with respect to the state variable `\(s_{t-1}\)`, the state variable can be treated as an **independent variable** that will not affect the endogenous choice variables.
+
+In this example,
+`$$\frac{\partial V_{t}}{\partial s_{t-1}} = \lambda_{t}R$$`
+
+which can be iterated forward one period to get: 
+
+`$$\begin{equation}\label{eq:envelope}
+\frac{\partial V_{t+1}}{\partial s_{t}} = \lambda_{t+1}R
+\end{equation}$$`
+
+---
+# 5. Collect terms
+First, we can combine the envelope condition in equation \eqref{eq:envelope} with equation \eqref{eq:focs} to get
+
+`$$\beta R \lambda_{t+1} - \lambda_{t} = 0$$`
+Combining equation \eqref{eq:focc} with the above, we get the inter-temporal optimality condition for household consumption, otherwise known as the household Euler equation:
+
+`$$u'(c_{t}) = \beta R u'(c_{t+1})$$`
+---
+# 6. Check
+If you did everything correctly, you should have an equal number of equations as unknown variables.
+
+The unknown variables in our example are the same as our control variables `\(c_{t}, s_{t-1}\)`.
+
+The Household Euler equation, the budget constraint and the transversality condition:
+$$
+`\begin{align}
+  u'(c_{t}) = \beta R u'(c_{t+1}) \tag{E1} \\
+  c_{t} + s_{t} = y_{t} + Rs_{t-1} \tag{E2} \\
+  \lim_{T \to \infty} \beta^{T} u'(c_{T}) s_{T} = 0 \tag{TVC}
+\end{align}`
+$$
+characterise the equilibrium conditions that pin down `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)`.
+
+Given a specific utility function and parameter values for `\(\beta\)` and  `\(R\)`, the path for consumption and savings `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)` can be estimated on a computer. There are many methods - the simplest (but also slowest) being Value Function Iteration.
+
+---
+# Summary
+We used the 6-step process to solve the representative household's maximisation problem and found the equilibrium conditions that characterise the paths for consumption and savings.
+1. Identifying control and state variables
+
+2. Set-up the Bellman Equation
+
+3. Solve the Bellman Equation
+
+4. Envelope Conditions
+
+5. Collect terms
+
+6. Check
+
+---
+# A more complicated example
+Consider a competitive closed economy in which the representative household chooses the rule of consumption, labor and stock holdings `\({c_t, n_t, a_t}\)` in order to maximize the expected discounted utility:
+`$$\mathbb{E}_{t}\left\{\sum_{\tau=t}^{\infty}\beta^{\tau-t}\left[2(c_{\tau})^{\frac{1}{2}}-n_{\tau}\right]\right\}$$`
+subject to the budget constraint:
+`$$c_{t}+p_{t} a_{t}=w_{t} n_{t}+\left(d_{t}+p_{t}\right) a_{t-1}$$`
+where `\(w_{t}\)` is real wage rate, `\(d_{t}\)` is dividend and `\(p_{t}\)` is ex-dividend price of the stock, and `\(\mathbb{E}_{t}\{\cdot\}\)` is expected value of conditional on information at date `\(t\)`.
+
+There is also a representative firm which maximizes the profit (=dividend) `\(d_{t} = y_{t} - w_{t} n_{t}\)` subject to the production function,
+`\(y_{t}=A_{t} n_{t}{ }^{\alpha}\)` where `\(0&lt;\alpha&lt;1\)`
+
+The aggregate productivity `\(A_{t}\)` is either high at `\(A^{H}\)` or low at `\(A^{L}\)`, and follows a Markov process as:
+
+`$$\mathbb{P}\left(A_{t+1}=A^{H} \mid A_{t}=A^{H}\right) = \mathbb{P}\left(A_{t+1}=A^{L} \mid A_{t}=A^{L}\right)=\gamma &gt;\frac{1}{2}$$`
+
+The supply of shares is normalized to be one per households, and the market clearing condition is given by `\(a_{t} = 1\)` and `\(y_{t} = c_{t}\)`.
+
+- Derive the conditions of the competitive equilibrium of this economy.
+
+---
+# Competitive Equilibrium
+.vmiddle[
+A **competitive equilibrium** is an allocation `\(\left\{c_{\tau}, n_{\tau}, a_{\tau}, d_{\tau}, y_{\tau}\right\}_{\tau = t}^{\infty}\)` with prices `\(\left\{p_{\tau}, w_{\tau} \right\}_{\tau = t}^{\infty}\)` such that the allocation solves the household and firm's maximisation problem and the allocation is feasible.
+]
+
+---
+# 1. Identify control and state variables
+
+The control variables are: `\({c_t, n_t, a_t}\)`.
+
+The state variables are: `\(a_{t-1}, A_{t}\)`.
+
+- In general, *prices* are **not** state variables, because they are not predetermined.
+
+???
+In general, *prices* are **not** state variables, because they are not predetermined, but rather determined in a rational expectations equilibrium. Households can calculate their optimal decision as a function of prices, and then prices are determined through market clearing conditions. While prices are not observable at time `\(t\)`, the assumption that households are rational means that they are able to form expectations on prices. Therefore, `\(p_{t}, w_{t}\)` are not state variables.
+
+---
+# 2. Set-up the Bellman Equation
+
+Define `\(V(a_{t-1}, A_{t})\)` as the value of the above maximisation given the endogenous state `\(a_{t-1}\)` and exogenous state `\(A_{t}\)`.
+
+$$
+`\begin{align*}
+    V(a_{t-1}, A_{t}) &amp;= \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \mathbb{E}_{t}\left[\sum_{\tau = t}^{\infty} \beta^{\tau-t} u(c_{\tau}, n_{\tau})\right]  \\
+    &amp;= \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \left\{u(c_{t}, n_{t}) + \beta \mathbb{E}_{t}\left[\sum_{\tau = t+1}^{\infty} \beta^{\tau - (t+1)} u(c_{\tau}, n_{\tau})\right] \right\} \\
+    \textit{(Tower rule)} &amp;= \max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \left\{u(c_{t}, n_{t}) + \beta \mathbb{E}_{t}\left[\mathbb{E}_{t+1}\left[\sum_{\tau = t+1}^{\infty} \beta^{\tau - (t+1)} u(c_{\tau}, n_{\tau})\right]\right] \right\} \\
+    &amp;= \max_{\{c_{t}, s_{t}\}} \left\{u(c_{t}, n_{t}) + \beta \mathbb{E}_{t}\left[\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t+1}^{\infty}} \mathbb{E}_{t+1}\left[\sum_{\tau = t+1}^{\infty} \beta^{\tau - (t+1)} u(c_{\tau}, n_{\tau})\right]\right] \right\} \\
+    &amp;= \max_{\{c_{t}, s_{t}\}} \left\{u(c_{t}, n_{t}) + \beta\mathbb{E}_{t}[V(a_{t}, A_{t+1})] \right\}
+\end{align*}`
+$$
+where the maximisation is subject to the same date `\(t\)` budget constraint.
+
+---
+# 3. Solving the Bellman Equation
+The Lagrangian for the representative household's maximisation problem is:
+
+`$$\mathcal{L} := 2(c_{t})^{\frac{1}{2}}-n_{t} + \beta \mathbb{E}_{t}[V(a_{t}, A_{t+1})] + \lambda_{t}[w_{t}n_{t} + (d_{t} + p_{t})a_{t-1} - c_{t} - p_{t}a_{t}]$$`
+
+Take first order conditions:
+
+$$
+`\begin{align}
+  \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad &amp; (c_{t})^{-\frac{1}{2}} - \lambda_{t} = 0 \label{eq:focc2} \\
+  \frac{\partial \mathcal{L}}{\partial n_{t}}: \qquad &amp; -1 + \lambda_{t}w_{t} = 0 \label{eq:focn2} \\
+  \frac{\partial \mathcal{L}}{\partial a_{t}}: \qquad &amp; \beta \mathbb{E}_{t} \left[\frac{\partial V_{t+1}}{\partial a_{t}}\right] - \lambda_{t}p_{t} = 0 \label{eq:foca2} \\
+\end{align}`
+$$
+---
+# 4. Envelope Conditions
+`$$\frac{\partial V_{t}}{\partial a_{t-1}} = \lambda_{t}(d_{t} + p_{t})$$`
+
+which can be iterated forward one period to get: 
+
+`$$\begin{equation}\label{eq:envelope2}
+    \frac{\partial V_{t+1}}{\partial a_{t}} = \lambda_{t+1}(d_{t+1} + p_{t+1}) 
+\end{equation}$$`
+
+---
+# 5. Collect terms
+First, we can combine the envelope condition in equation \eqref{eq:envelope2} with equation \eqref{eq:foca2} to get:
+`$$\beta \mathbb{E}_{t} [\lambda_{t+1}(d_{t+1} + p_{t+1})] - \lambda_{t}p_{t} = 0$$`
+Combining equation \eqref{eq:focc2} with the above, we get the household Euler equation:
+`$$\beta \mathbb{E}_{t} \left[\frac{d_{t+1} + p_{t+1}}{\sqrt{c_{t+1}}}\right] = \frac{p_{t}}{\sqrt{c_{t}}}$$`
+
+Combining equations \eqref{eq:focc2} and \eqref{eq:focn2}, we get:
+`$$\sqrt{c_{t}} = w_{t}$$`
+
+---
+# Firm maximisation problem
+
+The firm has a static maximisation problem:
+`$$\max_{\{n_{t}\}} A_{t}n_{t}^{\alpha}-w_{t}n_{t}$$`
+
+First Order Condition:
+`$$\alpha A_{t}n_{t}^{\alpha-1}-w_{t} = 0$$`
+
+---
+# 6. Check
+
+We have 7 unknown variables in our example: `\(c_{t}, n_{t}, a_{t}, p_{t}, d_{t}, w_{t}, y_{t}\)`.
+
+For identification, we need 7 linearly independent equations.
+
+$$
+`\begin{align}
+    &amp; \beta \mathbb{E}_{t} \left[\frac{d_{t+1} + p_{t+1}}{\sqrt{c_{t+1}}}\right] = \frac{p_{t}}{\sqrt{c_{t}}} \tag{CE1} \\
+    &amp; \sqrt{c_{t}} = w_{t} \tag{CE2} \\
+    &amp; \alpha A_{t}n_{t}^{\alpha-1}-w_{t} = 0 \tag{CE3} \\
+    &amp; c_{t}+p_{t} a_{t}=w_{t} n_{t}+\left(d_{t}+p_{t}\right) a_{t-1} \tag{CE4} \\
+    &amp; y_{t} = A_{t}n_{t}^{\alpha} \tag{CE5} \\
+    &amp; d_{t} = y_{t} - w_{t}n_{t} \tag{CE6} \\
+    &amp; a_{t} = 1 \tag{CE7} \\
+    &amp; \lim_{T \to \infty} \beta^{T} \mathbb{E}_{t}\left[\frac{d_{T} + p_{T}}{\sqrt{c_{T}}}a_{T} \right] = 0 \tag{TVC}
+\end{align}`
+$$
+
+These 7 equations plus the transversality condition characterise the competitive equilibrium for the economy.
+
+???
+We have 2 equations from the household's maximisation problem, 1 equation from the firm's maximisation problem, 3 resource constraints, 1 market clearing condition and finally a tranversality condition:
+
+### Walras' Law
+Note that while we had 2 market clearing conditions: `\(y_{t} = c_{t}\)` and `\(a_{t} = 1\)`, we only need to include one market clearing condition, as the other one will hold in equilibrium by *Walras' law*. Equations (4), (6) and (7) will imply `\(y_{t} = c_{t}\)`.
+
+---
+# Useful Resources
+### Lecture Notes:
+- Per Krussel's Macroeconomics lecture notes http://www.econ.yale.edu/smith/econ510a/book.pdf
+- Ben Moll's Macroeconomic Theory 1, Princeton, 2014 1st Year PhD lecture notes. https://benjaminmoll.com/lectures/
+
+### More advanced textbooks:
+- Acemoglu, Daron. 2007. "Introduction to Modern Economic Growth." Princeton University Press.
+- Ljungqvist, Lars &amp; Sargent, Thomas J., 2012. "Recursive Macroeconomic Theory, Third Edition." The MIT Press.
+- Stachurski, John. 2009. "Economic Dynamics." The MIT Press.
+- Stokey, Nancy L., et al. 1989. "Recursive Methods in Economic Dynamics." Harvard University Press.
+
+---
+# Practice
+.panelset[
+.panel[.panel-name[Problem]
+Consider the Brock-Mirman optimal growth model with stochastic shocks. The social planner chooses the paths for consumption and capital to maximise 
+`$$\mathbb{E}_{t}\left\{\sum_{\tau=t}^{\infty}\beta^{\tau-t} \ln{c_{\tau}} \right\}$$`
+subject to 
+`$$c_{t} + k_{t+1} \leq Ak_{t}^{\alpha}\theta_{t}$$` 
+`\(k_{t}\)` given, `\(A &gt; 0, 0 &lt; \alpha &lt; 1\)`, where `\(\{\theta_{t}\}\)` is an i.i.d. sequence with `\(\ln{\theta_{t}}\)` distributed `\(\mathcal{N}(0, \sigma^2)\)`.
+
+- Derive the conditions of the equilibrium of this economy.
+]
+
+.panel[.panel-name[Solution]
+The equilibrium is characterised by sequences `\(\{c_{\tau}, k_{\tau+1}\}_{\tau=t}^{\infty}\)` that satisfy:
+
+$$
+`\begin{align}
+    &amp; 1 = \mathbb{E}_{t}\left[\beta \frac{c_{t}}{c_{t+1}} A \alpha k_{t+1}^{\alpha-1}\theta_{t+1}\right] \tag{E1} \\
+    &amp; c_{t} + k_{t+1} = Ak_{t}^{\alpha}\theta_{t} \tag{E2} \\
+    &amp; \lim_{T \to \infty} \beta^{T} \mathbb{E}_{t}\left[\frac{ k_{T}^{\alpha}\theta_{T}}{c_{T}}\right] = 0 \tag{TVC}
+\end{align}`
+$$
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
