@@ -43,7 +43,7 @@ xaringanExtra::use_panelset()
 - Derive simple DSGE models analytically
 
 ### Prerequisites
-- Method of Lagrange multipliers
+- Method of Lagrange multipliers useful but not essential
 
 ???
 ### Motivation
@@ -144,7 +144,7 @@ Notation: $V_{t} = V(s_{t-1}, y_{t})$.
 Without proof:
 $$\frac{\partial V_{t}}{\partial s_{t-1}} = \frac{\partial \mathcal{L}}{\partial s_{t-1}}$$
 
-That is, when taking the derivative of the objective function with respect to the state variable $s_{t-1}$, the state variable can be treated as an **independent variable** that will not affect the endogenous choice variables.
+When taking the derivative of the objective function with respect to the state variable $s_{t-1}$, the state variable can be treated as an **independent variable** that will not affect the endogenous choice variables.
 
 In this example,
 $$\frac{\partial V_{t}}{\partial s_{t-1}} = \lambda_{t}R$$
