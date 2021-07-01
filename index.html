@@ -178,16 +178,16 @@ Combining equation \eqref{eq:focc} with the above, we get the inter-temporal opt
 `$$u'(c_{t}) = \beta R u'(c_{t+1})$$`
 ---
 # 6. Check
-For identification, you should have an equal number of linearly independent equations as unknown variables.
+- Need equal number of linearly independent equations as unknown variables.
 
-There are 2 unknown variables in our example: `\(c_{t}, s_{t-1}\)`.
+- There are 2 unknown variables in our example: `\(c_{t}, s_{t-1}\)`.
 
 The Household Euler equation, the budget constraint and the transversality condition:
 $$
 `\begin{align}
   u'(c_{t}) = \beta R u'(c_{t+1}) \tag{E1} \\
   c_{t} + s_{t} = y_{t} + Rs_{t-1} \tag{E2} \\
-  \lim_{T \to \infty} \beta^{T} u'(c_{T}) s_{T} = 0 \tag{TVC}
+  \lim_{T \to \infty} \beta^{T} u'(c_{T}) s_{T-1} = 0 \tag{TVC}
 \end{align}`
 $$
 characterise the equilibrium conditions that pin down `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)`.
@@ -195,9 +195,16 @@ characterise the equilibrium conditions that pin down `\(\left\{c_{\tau}, s_{\ta
 Given a specific utility function and parameter values for `\(\beta\)` and  `\(R\)`, the path for consumption and savings `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)` can be numerically estimated on a computer.
 
 ???
-If you did everything correctly, you should have an equal number of linearly independent equations as unknown variables.
+If you did everything correctly, you should have an equal number of linearly independent equations as unknown variables, for identification.
 
 The unknown variables in our example are the same as our control variables `\(c_{t}, s_{t-1}\)`.
+
+### Transversality condition:
+Heuristically, the transversality condition prevents the overaccumulation of savings. 
+
+The transversality condition is an optimality condition and must be satisfied in order for the individual to maximize its intertemporal utility. Just as in a finite horizon model, i
+
+The transversality condition can be given this interpretation: `\(u'(c_{T})\)` is the marginal benefit of an additional inherited unit of savings at date `\(T\)`. `\(u'(c_{T}) s_{T-1}\)` is the total value of inherited savings at date `\(T\)`. Just as the expected present value of last-period savings in the finite-horizon version of this problem must be 0, the expected present value of savings in the infinite horizon must also be 0.
 
 ### Numerical Estimation:
 There are many methods - the simplest being Value Function Iteration. The algorithms for solving these models are outside the scope of this course. See Ben Moll's lecture notes for further reading.
