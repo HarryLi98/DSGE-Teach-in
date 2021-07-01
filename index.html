@@ -4,7 +4,7 @@
     <title>Introduction to DSGE Modeling</title>
     <meta charset="utf-8" />
     <meta name="author" content="Harry Li" />
-    <meta name="date" content="2021-06-30" />
+    <meta name="date" content="2021-07-01" />
     <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -26,7 +26,7 @@ class: center, middle, inverse, title-slide
 ## FSSR-MRD Teach-in
 ### Harry Li
 ### Bank of England
-### 2021-06-30
+### 2021-07-01
 
 ---
 
@@ -56,7 +56,7 @@ MathJax.Hub.Config({
 - Derive simple DSGE models analytically
 
 ### Prerequisites
-- Method of Lagrange multipliers
+- Method of Lagrange multipliers useful but not essential
 
 ???
 ### Motivation
@@ -89,7 +89,7 @@ Individual household chooses paths for consumption and saving at time `\(t\)` to
 `$$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \sum_{\tau = t}^{\infty} \beta^{\tau - t} u(c_{\tau})$$`
 subject to the budget constraint for each `\(t\)`:
 `$$c_{t} + s_{t} \leq y_{t} + Rs_{t-1}$$`
-**Assumptions**
+### Assumptions 
 - `\(u'&gt;0, u''&lt;0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
 - `\(s_{t} \geq 0\)` 
 - Constant interest rate `\(R\)`
@@ -157,7 +157,7 @@ Notation: `\(V_{t} = V(s_{t-1}, y_{t})\)`.
 Without proof:
 `$$\frac{\partial V_{t}}{\partial s_{t-1}} = \frac{\partial \mathcal{L}}{\partial s_{t-1}}$$`
 
-That is, when taking the derivative of the objective function with respect to the state variable `\(s_{t-1}\)`, the state variable can be treated as an **independent variable** that will not affect the endogenous choice variables.
+When taking the derivative of the objective function with respect to the state variable `\(s_{t-1}\)`, the state variable can be treated as an **independent variable** that will not affect the endogenous choice variables.
 
 In this example,
 `$$\frac{\partial V_{t}}{\partial s_{t-1}} = \lambda_{t}R$$`
