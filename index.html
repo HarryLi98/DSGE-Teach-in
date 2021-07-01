@@ -178,9 +178,9 @@ Combining equation \eqref{eq:focc} with the above, we get the inter-temporal opt
 `$$u'(c_{t}) = \beta R u'(c_{t+1})$$`
 ---
 # 6. Check
-If you did everything correctly, you should have an equal number of equations as unknown variables.
+For identification, you should have an equal number of linearly independent equations as unknown variables.
 
-The unknown variables in our example are the same as our control variables `\(c_{t}, s_{t-1}\)`.
+There are 2 unknown variables in our example: `\(c_{t}, s_{t-1}\)`.
 
 The Household Euler equation, the budget constraint and the transversality condition:
 $$
@@ -192,7 +192,15 @@ $$
 $$
 characterise the equilibrium conditions that pin down `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)`.
 
-Given a specific utility function and parameter values for `\(\beta\)` and  `\(R\)`, the path for consumption and savings `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)` can be estimated on a computer. There are many methods - the simplest (but also slowest) being Value Function Iteration.
+Given a specific utility function and parameter values for `\(\beta\)` and  `\(R\)`, the path for consumption and savings `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)` can be numerically estimated on a computer.
+
+???
+If you did everything correctly, you should have an equal number of linearly independent equations as unknown variables.
+
+The unknown variables in our example are the same as our control variables `\(c_{t}, s_{t-1}\)`.
+
+### Numerical Estimation:
+There are many methods - the simplest being Value Function Iteration. The algorithms for solving these models are outside the scope of this course. See Ben Moll's lecture notes for further reading.
 
 ---
 # Summary
@@ -279,6 +287,11 @@ $$
 $$
 ---
 # 4. Envelope Conditions
+
+Recall that the envelope condition states that:
+`$$\frac{\partial V_{t}}{\partial a_{t-1}} = \frac{\partial \mathcal{L}_{t}}{\partial a_{t-1}}$$`
+
+Therefore,
 `$$\frac{\partial V_{t}}{\partial a_{t-1}} = \lambda_{t}(d_{t} + p_{t})$$`
 
 which can be iterated forward one period to get: 
