@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Introduction to DSGE Modeling</title>
+    <title>Introduction to DSGE Modelling</title>
     <meta charset="utf-8" />
     <meta name="author" content="Harry Li" />
-    <meta name="date" content="2021-07-01" />
+    <meta name="date" content="2021-07-06" />
     <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
     <script src="libs/fabric-4.3.1/fabric.min.js"></script>
@@ -22,11 +23,11 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Introduction to DSGE Modeling
+# Introduction to DSGE Modelling
 ## FSSR-MRD Teach-in
 ### Harry Li
 ### Bank of England
-### 2021-07-01
+### 2021-07-06
 
 ---
 
@@ -52,7 +53,7 @@ MathJax.Hub.Config({
 - Widely used by Central Banks
 
 ### Aim
-- Introduction to DSGE Modeling
+- Introduction to DSGE Modelling
 - Derive simple DSGE models analytically
 
 ### Prerequisites
@@ -60,47 +61,96 @@ MathJax.Hub.Config({
 
 ???
 ### Motivation
-- DSGE models are widely used in macroeconomic research, for example to explain and predict co-movements of aggregate time series over the business cycle as well as to perform policy analysis. DSGE models are a prominent tool for forecasting at central banks, such as the Bank of England's COMPASS. Therefore, it's useful to understand how these models work.
+- DSGE models are widely used in macroeconomic research and appear in almost every substantive area of macroeconomics, such as the theory of investment, the theory of the consumer, search theory, public finance, growth theory and so on. One of the reasons that DSGE models are attractive is that these models are derived from micro foundations - that is households with rational expectations maximizing utility, firms maximize profits, in general equilibrium. 
+
+DSGE models can be used to explain and predict co-movements of aggregate time series over the business cycle as well as to perform policy analysis. DSGE models are also a prominent tool for forecasting - almost every central bank has some DSGE model, such as the Bank of England's COMPASS. Therefore, it's useful to understand how these models work.
 
 ### Aim
-The aim of this teach-in is to give an introduction to DSGE modeling. At the end of this teach-in, you should be able to derive simple DSGE models analytically. Technical mathematical details are omitted, but useful resources are provided at the end for further reading. 
+The aim of this teach-in is to give an introduction to DSGE modelling. At the end of this teach-in, you should be able to derive simple DSGE models analytically. Technical mathematical details are omitted, but useful resources are provided at the end for further reading. 
 
 ### Prerequisites
 No prerequisites are required except some basic knowledge of convex optimisation, in particular the method of Lagrangian multipliers is useful.
 ---
 
-# Overview
-We focus on models with:
-- Discrete time
-- Infinite Horizon
-- Representative households
+# Overview of DSGE model structures
 
-.full-width[.content-box-blue[The *representative household* assumption means that all households' preferences are identical. That is, preferences can be represented as if a single household made the aggregate consumption and saving decisions subject to a single budget constraint.]]
+.pull-left[.Large[Discrete Time]
+- `\(t = \{0, 1, 2, ... \}\)`
+- Simpler
+- Bellman equation
+]
+
+.pull-right[.Large[Continuous Time]
+- `\(t \in \mathbb{R}\)`
+- More analytical tractability
+- Hamilton-Jacobi-Bellman equation
+]
+
+.pull-left[.Large[Homogeneous]
+- Households/firms' preferences identical
+- Answer aggregate questions
+- Assumption often not realistic
+]
+
+.pull-right[.Large[Heterogeneous]
+- Households/firms' preferences differ
+- Answer distributional questions
+- Empirically matches data better
+]
+
+
+.pull-left[.Large[Infinite Horizon]
+- Agents live indefinitely
+- Stationary
+]
+
+.pull-right[.Large[Finite Horizon]
+- Agents live for a finite amount of time
+- Non-stationary
+]
+
 
 ???
 The methods for continuous time problems are largely the same but the maths is slightly more complicated when working in continuous time.
 
 The representative household assumption limits us to answering questions pertaining to the aggregate economy. Incorporating heterogeneity allows us to answer questions on distributional impacts. 
 
+We focus on models with:
+- Discrete time
+- Infinite-horizon
+- Economies with representative households
+
 ---
 # Deterministic Consumption-Saving Problem
 
 Individual household chooses paths for consumption and saving at time `\(t\)` to maximize the discounted sum of utilities
 `$$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \sum_{\tau = t}^{\infty} \beta^{\tau - t} u(c_{\tau})$$`
-subject to the budget constraint for each `\(t\)`:
-`$$c_{t} + s_{t} \leq y_{t} + Rs_{t-1}$$`
+subject to the budget constraint for each `\(\tau \geq t\)`:
+`$$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$`
 ### Assumptions 
 - `\(u'&gt;0, u''&lt;0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
-- `\(s_{t} \geq 0\)` 
+- `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`
 - Constant interest rate `\(R\)`
 - Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{\infty}\)`
 
-We are interested in the equilibrium paths for `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)`.
+We are interested in the equilibrium paths for `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{\infty}\)` that solve the household optimisation problem.
 
 ???
+### Assumptions
+- `\(u'&gt;0, u''&lt;0\)` standard assumptions: utility is increasing but marginal utility is decreasing in consumption.
+`\(\lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)` Inada conditions are also frequently assumed. The role of these conditions is to ensure the existence of an interior equilibrium. `\(\lim_{c \to 0} u'(c) = \infty\)` implies that the first unit of consumption is infinitely beneficial to the household. `\(\lim_{c \to \infty} u'(c) = 0\)` implies that the marginal utility from consumption is `\(0\)` when consumption is infinite.
 
-This maximization problem can be solved in a number of ways, for example, by setting up an infinite-dimensional Lagrangian. But the most convenient and common way of approaching it is by solving recursively.
+- Savings non-negative. No markets in this model; one-good economy in which the household can either consume or save (e.g. farmer and crops).
 
+- Interest rate `\(R\)` is assumed to be constant. In model with markets, interest rate is endogenously determined through market clearing conditions. No markets here.
+
+- Exogenous deterministic income stream
+
+This model is straightforward given there is no uncertainty. Household has a simple problem and must balance the trade-off between consumption and saving. If they consume more today, they have less savings tomorrow, which lowers future consumption. If they save more today, they have more consumption tomorrow but consume less today.
+
+This maximisation problem can be solved in a number of ways, for example, by setting up an infinite-dimensional Lagrangian. But the most convenient and common way of approaching it is by solving recursively.
+
+[Pause for questions on set-up of model]
 ---
 
 # 1. Identifying control and state variables
@@ -131,6 +181,13 @@ $$
 $$
 where the maximisation is subject to the same date `\(t\)` budget constraint.
 
+???
+The state variables are the arguments for the value function.
+
+Nice property of infinite horizon models is that they are stationary; that is, after making a decision today, the problem tomorrow becomes the same as the problem today.
+
+Useful to write the problem recursively as it simplifies the problem, since we only need to solve one Bellman equation.
+
 ---
 # 3. Solving the Bellman Equation
 
@@ -150,7 +207,6 @@ $$
 $$
 Notation: `\(V_{t} = V(s_{t-1}, y_{t})\)`.
 
-
 ---
 # 4. Envelope Conditions
 
@@ -164,16 +220,18 @@ In this example,
 
 which can be iterated forward one period to get: 
 
-`$$\begin{equation}\label{eq:envelope}
+$$
+`\begin{equation}
 \frac{\partial V_{t+1}}{\partial s_{t}} = \lambda_{t+1}R
-\end{equation}$$`
+\end{equation}`
+$$
 
 ---
 # 5. Collect terms
-First, we can combine the envelope condition in equation \eqref{eq:envelope} with equation \eqref{eq:focs} to get
+First, we can combine the envelope condition in equation ([3](#8)) with equation ([2](#7)) to get
 
 `$$\beta R \lambda_{t+1} - \lambda_{t} = 0$$`
-Combining equation \eqref{eq:focc} with the above, we get the inter-temporal optimality condition for household consumption, otherwise known as the household Euler equation:
+Combining equation ([1](#7)) with the above, we get the inter-temporal optimality condition for household consumption, otherwise known as the household Euler equation:
 
 `$$u'(c_{t}) = \beta R u'(c_{t+1})$$`
 ---
@@ -200,9 +258,9 @@ If you did everything correctly, you should have an equal number of linearly ind
 The unknown variables in our example are the same as our control variables `\(c_{t}, s_{t-1}\)`.
 
 ### Transversality condition:
-Heuristically, the transversality condition prevents the overaccumulation of savings. 
+Heuristically, the transversality condition prevents the over-accumulation of savings. 
 
-The transversality condition is an optimality condition and must be satisfied in order for the individual to maximize its intertemporal utility. Just as in a finite horizon model, i
+The transversality condition is an optimality condition and must be satisfied in order for the individual to maximize its inter-temporal utility.
 
 The transversality condition can be given this interpretation: `\(u'(c_{T})\)` is the marginal benefit of an additional inherited unit of savings at date `\(T\)`. `\(u'(c_{T}) s_{T-1}\)` is the total value of inherited savings at date `\(T\)`. Just as the expected present value of last-period savings in the finite-horizon version of this problem must be 0, the expected present value of savings in the infinite horizon must also be 0.
 
@@ -211,7 +269,7 @@ There are many methods - the simplest being Value Function Iteration. The algori
 
 ---
 # Summary
-We used the 6-step process to solve the representative household's maximisation problem and found the equilibrium conditions that characterise the paths for consumption and savings.
+We used the 6-step process to solve the representative household's maximisation problem and found the equilibrium conditions that characterize the paths for consumption and savings.
 1. Identifying control and state variables
 
 2. Set-up the Bellman Equation
@@ -223,6 +281,54 @@ We used the 6-step process to solve the representative household's maximisation 
 5. Collect terms
 
 6. Check
+
+---
+# Deterministic Consumption-Saving - Finite Horizon
+
+Individual household chooses paths for consumption and saving at time `\(t\)` to maximize the discounted sum of utilities
+`$$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{T}} \sum_{\tau = t}^{T} \beta^{\tau - t} u(c_{\tau})$$`
+subject to the budget constraint for each `\(t \leq \tau \leq T\)`:
+`$$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$`
+### Assumptions 
+- `\(u'&gt;0, u''&lt;0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
+- `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`
+- Constant interest rate `\(R\)`
+- Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{T}\)`
+
+We are interested in the equilibrium paths for `\(\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{T}\)` that solve the household optimization problem.
+
+---
+# Finite horizon dynamic programming
+
+- Value function depends on time `\(\tau\)`.
+
+- Backward iteration starting at `\(\tau = T\)`
+$$
+`\begin{align*}
+&amp; V_{T}(s_{T-1}, y_{T}) = \max_{\{c_{T}, s_{T}\}} u(c_{T}) \qquad \text{subject to} \\
+&amp; c_{T} + s_{T} \leq y_{T} + Rs_{T-1} \\
+&amp; s_{T} \geq 0
+\end{align*}`
+$$
+- Solution is to consume all wealth in final period
+$$
+`\begin{align*}
+c_{T} &amp;= y_{T} + Rs_{T-1} \\
+s_{T} &amp;= 0 \\
+V_{T}(s_{T-1}, y_{T}) &amp;= u(y_{T} + Rs_{T-1})
+\end{align*}`
+$$
+
+- Solve same Bellman equation as in infinite-horizon problem:
+$$
+`\begin{align*}
+&amp; V_{t}(s_{t-1}, y_{t}) = \max_{\{c_{t}, s_{t}\}} u(c_{t}) + \beta V_{t+1}(s_{t}, y_{t+1}) \qquad \text{subject to} \\
+&amp; c_{t} + s_{t} \leq y_{t} + Rs_{t-1} \\
+&amp; s_{t} \geq 0 \\
+&amp; c_{T} = y_{T} + Rs_{T-1}\\
+&amp; s_{T} = 0 
+\end{align*}`
+$$
 
 ---
 # A more complicated example
@@ -243,11 +349,12 @@ The supply of shares is normalized to be one per households, and the market clea
 
 - Derive the conditions of the competitive equilibrium of this economy.
 
----
-# Competitive Equilibrium
-.vmiddle[
+???
+The *representative household* assumption means that all households' preferences are identical. That is, preferences can be represented as if a single household made the aggregate consumption and saving decisions subject to a single budget constraint.
+
+A **markov process** `\(A_{t}\)` is a stochastic process in which the distribution of `\(A_{t}\)` conditional on the whole history of past realizations of `\(A^{t-1}\)` is a function of only the most recent realization `\(A_{t}\)`. This assumption is useful as it allows us to write the maximisation problem recursively as seen before.
+
 A **competitive equilibrium** is an allocation `\(\left\{c_{\tau}, n_{\tau}, a_{\tau}, d_{\tau}, y_{\tau}\right\}_{\tau = t}^{\infty}\)` with prices `\(\left\{p_{\tau}, w_{\tau} \right\}_{\tau = t}^{\infty}\)` such that the allocation solves the household and firm's maximisation problem and the allocation is feasible.
-]
 
 ---
 # 1. Identify control and state variables
@@ -309,12 +416,12 @@ which can be iterated forward one period to get:
 
 ---
 # 5. Collect terms
-First, we can combine the envelope condition in equation \eqref{eq:envelope2} with equation \eqref{eq:foca2} to get:
+First, we can combine the envelope condition in equation ([7](#18)) with equation ([6](#17)) to get:
 `$$\beta \mathbb{E}_{t} [\lambda_{t+1}(d_{t+1} + p_{t+1})] - \lambda_{t}p_{t} = 0$$`
-Combining equation \eqref{eq:focc2} with the above, we get the household Euler equation:
+Combining equation ([4](#17)) with the above, we get the household Euler equation:
 `$$\beta \mathbb{E}_{t} \left[\frac{d_{t+1} + p_{t+1}}{\sqrt{c_{t+1}}}\right] = \frac{p_{t}}{\sqrt{c_{t}}}$$`
 
-Combining equations \eqref{eq:focc2} and \eqref{eq:focn2}, we get:
+Combining equations ([4](#17)) and ([5](#17)), we get:
 `$$\sqrt{c_{t}} = w_{t}$$`
 
 ---
@@ -346,10 +453,17 @@ $$
 \end{align}`
 $$
 
-These 7 equations plus the transversality condition characterise the competitive equilibrium for the economy.
+A competitive equilibrium of the economy is given by the stochastic processes for `\(\{c_{\tau}, n_{\tau}, a_{\tau}, p_{\tau}, d_{\tau}, w_{\tau}, y_{\tau}\}_{\tau=t}^{\infty}\)` with `\(a_{t-1}\)` given, such that all stochastic processes satisfy the conditions from household and firm optimisation, and market clearing conditions given by the above 7 equations plus the transversality condition.
 
 ???
-We have 2 equations from the household's maximisation problem, 1 equation from the firm's maximisation problem, 3 resource constraints, 1 market clearing condition and finally a tranversality condition:
+### Identification
+- We have 2 equations from the household's maximisation problem, 1 equation from the firm's maximisation problem, 3 resource constraints, 1 market clearing condition and finally a transversality condition:
+
+### Transversality Condition
+- The transversality condition has a similar interpretation to before. `\(\frac{d_{T} + p_{T}}{\sqrt{c_{T}}}\)` is the marginal benefit of an additional inherited unit of stock holdings at date `\(T\)`. `\(\frac{d_{T} + p_{T}}{\sqrt{c_{T}}}a_{T-1}\)` is the total value of inherited stock holdings at date `\(T\)`. The transversality condition implies that the expected present value of stock holdings in the infinite horizon must be 0.
+
+### Model interpretation
+- Suppose there's an increase in aggregate productivity, from `\(A_{t}^{L}\)` to `\(A_{t}^{H}\)`. Directly, output `\(y_{t}\)` increases and wage `\(w_{t}\)` increases. This leads to an increase in consumption `\(c_{t}\)`.
 
 ### Walras' Law
 Note that while we had 2 market clearing conditions: `\(y_{t} = c_{t}\)` and `\(a_{t} = 1\)`, we only need to include one market clearing condition, as the other one will hold in equilibrium by *Walras' law*. Equations (4), (6) and (7) will imply `\(y_{t} = c_{t}\)`.
@@ -365,6 +479,11 @@ Note that while we had 2 market clearing conditions: `\(y_{t} = c_{t}\)` and `\(
 - Ljungqvist, Lars &amp; Sargent, Thomas J., 2012. "Recursive Macroeconomic Theory, Third Edition." The MIT Press.
 - Stachurski, John. 2009. "Economic Dynamics." The MIT Press.
 - Stokey, Nancy L., et al. 1989. "Recursive Methods in Economic Dynamics." Harvard University Press.
+
+???
+- Per Krussel: General background
+- Ben Moll: Modelling in continuous time, with heterogeneous households, notes on numerical approximation with codes.
+- Textbooks give more rigorous treatment. Most self-contained but maths more complicated; in particular knowledge of real analysis and measure theory is useful. Stokey, Lucas with Prescott is the 'go to' book but quite challenging.
 
 ---
 # Practice
@@ -391,6 +510,8 @@ $$
 $$
 ]
 ]
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
