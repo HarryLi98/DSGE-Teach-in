@@ -114,7 +114,7 @@ No prerequisites are required but some basic knowledge of convex optimisation, i
 
 ???
 ### Overview
-There are many types of DSGE model structures and I'll talk briefly about some of these structures and their relative advantages and disadvantages. The methods required for solving these models differ. Given this is an introductory teach-in, I will focus only on methods to solve discrete time models with homogeneous household structure. I'll cover methods for solving both infinite horizon and finite horizon problems, given that they are very similar. 
+There are many types of DSGE model structures and I'll talk briefly about some of these structures and their relative advantages and disadvantages. The methods required for solving these models also differ by model structure.
 
 ### Modelling with Discrete Time or Continuous Time 
 
@@ -149,7 +149,7 @@ subject to the budget constraint for each `\(\tau \geq t\)`:
 `$$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$`
 ### Assumptions 
 - `\(u'&gt;0, u''&lt;0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
-- `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`
+- `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`, with `\(s_{t-1}\)` given.
 - Constant interest rate `\(R &gt; 0\)`
 - Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{\infty}\)`
 
@@ -176,8 +176,10 @@ This maximisation problem can be solved in a number of ways, for example, by set
 # 1. Identifying control and state variables
 
 .full-width[.content-box-blue[**Control variables** are variables that agents choose.]]
-Control variables are usually easy to identify. In this example, the control variables are `\(c_t, s_t\)`.
-
+Control variables are usually easy to identify. 
+--
+In this example, the control variables are `\(c_t, s_t\)`.
+--
 
 .full-width[.content-box-blue[**State variables** are:
 - Predetermined - the agent can observe the values for the state variables at time `\(t\)` prior to making a decision.
@@ -185,8 +187,15 @@ Control variables are usually easy to identify. In this example, the control var
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.
 ]]
 
-State variables are more difficult to identify. In this example, there is an endogenous state variable `\(s_{t-1}\)` and an exogenous state variable `\(y_{t}\)`.
+State variables are more difficult to identify. 
+--
+In this example, there is an endogenous state variable `\(s_{t-1}\)` and an exogenous state variable `\(y_{t}\)`.
 
+???
+### State variables
+Loosely speaking, state variables are variables that the agent needs to know in order to make a correct decision.
+
+Not redundant - For example, if a variable is a function of only known values, then it is not a state variable.
 ---
 
 # 2. Set-up the Bellman Equation
@@ -372,7 +381,7 @@ $$
 # A more complicated example
 Consider a competitive closed economy in which the representative household chooses the rule of consumption, labor and stock holdings `\({c_t, n_t, a_t}\)` in order to maximize the expected discounted utility:
 `$$\mathbb{E}_{t}\left\{\sum_{\tau=t}^{\infty}\beta^{\tau-t}\left[2(c_{\tau})^{\frac{1}{2}}-n_{\tau}\right]\right\}$$`
-subject to the budget constraint:
+subject to the per-period budget constraint:
 `$$c_{t}+p_{t} a_{t}=w_{t} n_{t}+\left(d_{t}+p_{t}\right) a_{t-1}$$`
 where `\(w_{t}\)` is real wage rate, `\(d_{t}\)` is dividend and `\(p_{t}\)` is ex-dividend price of the stock, and `\(\mathbb{E}_{t}\{\cdot\}\)` is expected value of conditional on information at date `\(t\)`.
 
@@ -397,8 +406,10 @@ A **competitive equilibrium** is an allocation `\(\left\{c_{\tau}, n_{\tau}, a_{
 ---
 # 1. Identify control and state variables
 
+--
 The control variables are: `\({c_t, n_t, a_t}\)`.
 
+--
 The state variables are: `\(a_{t-1}, A_{t}\)`.
 
 - In general, *prices* are **not** state variables, because they are not predetermined.
