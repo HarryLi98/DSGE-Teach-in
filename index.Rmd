@@ -393,12 +393,20 @@ A **competitive equilibrium** is an allocation $\left\{c_{\tau}, n_{\tau}, a_{\t
 ---
 # 1. Identify control and state variables
 
---
-The control variables are: ${c_t, n_t, a_t}$.
+Recall that:
+
+.full-width[.content-box-blue[**Control variables** are variables that agents choose.]]
+.full-width[.content-box-blue[**State variables** are:
+- Predetermined - the agent can observe the values for the state variables at time $t$ prior to making a decision.
+- Relevant - the value of state variables affect the agent's choices and utility.
+- Not redundant - the information the state variable contains cannot be summarized in a simpler way.]]
 
 --
-The state variables are: $a_{t-1}, A_{t}$.
 
+- The control variables are: ${c_t, n_t, a_t}$.
+--
+
+- The state variables are: $a_{t-1}, A_{t}$.
 - In general, *prices* are **not** state variables, because they are not predetermined.
 
 ???
