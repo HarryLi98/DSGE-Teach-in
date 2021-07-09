@@ -163,10 +163,7 @@ This maximisation problem can be solved in a number of ways, for example, by set
 # 1. Identifying control and state variables
 
 .full-width[.content-box-blue[**Control variables** are variables that agents choose.]]
-Control variables are usually easy to identify. 
---
-In this example, the control variables are $c_t, s_t$.
---
+Control variables are usually easy to identify. In this example, the control variables are $c_t, s_t$.
 
 .full-width[.content-box-blue[**State variables** are:
 - Predetermined - the agent can observe the values for the state variables at time $t$ prior to making a decision.
@@ -174,9 +171,7 @@ In this example, the control variables are $c_t, s_t$.
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.
 ]]
 
-State variables are more difficult to identify. 
---
-In this example, there is an endogenous state variable $s_{t-1}$ and an exogenous state variable $y_{t}$.
+State variables are more difficult to identify. In this example, there is an endogenous state variable $s_{t-1}$ and an exogenous state variable $y_{t}$.
 
 ???
 ### State variables
@@ -402,11 +397,7 @@ Recall that:
 - Relevant - the value of state variables affect the agent's choices and utility.
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.]]
 
---
-
 - The control variables are: ${c_t, n_t, a_t}$.
---
-
 - The state variables are: $a_{t-1}, A_{t}$.
 - In general, *prices* are **not** state variables, because they are not predetermined.
 
