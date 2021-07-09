@@ -222,12 +222,13 @@ There are two ways to solve the recursive problem. Either
 Using Lagrangian:
 $$\mathcal{L} := u(c_{t}) + \beta V(s_{t}, y_{t+1}) + \lambda_{t}[y_{t} + Rs_{t-1} - c_{t} - s_{t}]$$
 
-Take first order conditions with respect to control variables $c_{t}, s_{t}$:
+Take first order conditions with respect to control variables $c_{t}, s_{t}$ and co-state $\lambda_{t}$:
 
 $$
 \begin{align}
-    \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad & u'(c_{t}) - \lambda_{t} = 0 \label{eq:focc}\\
-    \frac{\partial \mathcal{L}}{\partial s_{t}}: \qquad & \beta \frac{\partial V_{t+1}}{\partial s_{t}} - \lambda_{t} = 0 \label{eq:focs}
+    \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad & u'(c_{t}) - \lambda_{t} = 0 \\
+    \frac{\partial \mathcal{L}}{\partial s_{t}}: \qquad & \beta \frac{\partial V_{t+1}}{\partial s_{t}} - \lambda_{t} = 0 \\
+    \frac{\partial \mathcal{L}}{\partial \lambda_{t}}: \qquad & c_{t} + s_{t} = y_{t} + Rs_{t-1} \tag{BC}
 \end{align}
 $$
 Notation: $V_{t} = V(s_{t-1}, y_{t})$.
@@ -434,13 +435,14 @@ The Lagrangian for the representative household's maximisation problem is:
 
 $$\mathcal{L} := 2(c_{t})^{\frac{1}{2}}-n_{t} + \beta \mathbb{E}_{t}[V(a_{t}, A_{t+1})] + \lambda_{t}[w_{t}n_{t} + (d_{t} + p_{t})a_{t-1} - c_{t} - p_{t}a_{t}]$$
 
-Take first order conditions:
+Take first order conditions with respect to control variables $c_{t}, n_{t}, a_{t}$ and co-state $\lambda_{t}$:
 
 $$
 \begin{align}
-  \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad & (c_{t})^{-\frac{1}{2}} - \lambda_{t} = 0 \label{eq:focc2} \\
-  \frac{\partial \mathcal{L}}{\partial n_{t}}: \qquad & -1 + \lambda_{t}w_{t} = 0 \label{eq:focn2} \\
-  \frac{\partial \mathcal{L}}{\partial a_{t}}: \qquad & \beta \mathbb{E}_{t} \left[\frac{\partial V_{t+1}}{\partial a_{t}}\right] - \lambda_{t}p_{t} = 0 \label{eq:foca2} \\
+  \frac{\partial \mathcal{L}}{\partial c_{t}}: \qquad & (c_{t})^{-\frac{1}{2}} - \lambda_{t} = 0 \\
+  \frac{\partial \mathcal{L}}{\partial n_{t}}: \qquad & -1 + \lambda_{t}w_{t} = 0 \\
+  \frac{\partial \mathcal{L}}{\partial a_{t}}: \qquad & \beta \mathbb{E}_{t} \left[\frac{\partial V_{t+1}}{\partial a_{t}}\right] - \lambda_{t}p_{t} = 0 \\
+  \frac{\partial \mathcal{L}}{\partial \lambda_{t}}: \qquad & c_{t} + p_{t}a_{t} = w_{t}n_{t} + (d_{t} + p_{t})a_{t-1} \tag{BC}
 \end{align}
 $$
 ---
