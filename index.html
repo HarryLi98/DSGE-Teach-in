@@ -150,8 +150,8 @@ Individual household chooses paths for consumption and saving at time `\(t\)` to
 subject to the budget constraint for each `\(\tau \geq t\)`:
 `$$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$`
 ### Assumptions 
-- `\(u'&gt;0, u''&lt;0, \lim_{c \to 0}\)`
-- `\(u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
+- `\(u'&gt;0, u''&lt;0\)`
+- `\(\lim_{c \to \infty} u'(c) = 0, \lim_{c \to 0} u'(c) = \infty\)`
 - `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`, with `\(s_{t-1}\)` given.
 - Constant interest rate `\(R &gt; 0\)`
 - Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{\infty}\)`
@@ -161,7 +161,9 @@ We are interested in the equilibrium paths for `\(\left\{c_{\tau}, s_{\tau}\righ
 ???
 ### Assumptions
 - We'll have some technical assumptions on the utility function. `\(u'&gt;0, u''&lt;0\)` standard assumptions: utility is increasing but marginal utility is decreasing in consumption.
-- The next set of assumptions on the utility function are known as the Inada conditions, which are also frequently assumed. The role of these conditions is to ensure the existence of an interior equilibrium. `\(\lim_{c \to 0} u'(c) = \infty\)` implies that the first unit of consumption is infinitely beneficial to the household. `\(\lim_{c \to \infty} u'(c) = 0\)` implies that the marginal utility from consumption is `\(0\)` when consumption is infinite. The interpretation for this might be that you die of starvation if you consuming nothing, which gives `\(-\infty\)` utility, since dying is very undesirable.
+- The next set of assumptions on the utility function are known as the Inada conditions, which are also frequently assumed. The role of these conditions is to ensure the existence of an interior equilibrium. 
+The first assumption implies that the marginal utility from consumption is `\(0\)` when consumption is infinite.
+The second assumption implies that the first unit of consumption is infinitely beneficial to the household. The interpretation for this assumption might be that you die of starvation if you consuming nothing, which gives `\(-\infty\)` utility, since dying is very undesirable.
 
 - Savings are non-negative and pay interest. The interest rate `\(R\)` is assumed to be constant. In this model, there are no markets, so households can't borrow. Think of it as a one-good economy in which the household can either consume or save (e.g. farmer and crops).
 
@@ -353,7 +355,7 @@ subject to the budget constraint for each `\(t \leq \tau \leq T\)`:
 `$$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$`
 ### Assumptions 
 - `\(u'&gt;0, u''&lt;0\)`
-- `\(\lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0\)`
+- `\(\lim_{c \to \infty} u'(c) = 0, \lim_{c \to 0} u'(c) = \infty\)`
 - `\(s_{\tau} \geq 0\)` for all `\(\tau \geq t\)`
 - Constant interest rate `\(R\)`
 - Exogenous deterministic income stream `\(\{y_{\tau}\}_{\tau = t}^{T}\)`
