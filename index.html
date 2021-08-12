@@ -179,19 +179,13 @@ This maximisation problem can be solved in a number of ways, for example, by set
 
 .full-width[.content-box-blue[**Control variables** are variables that agents choose.]]
 
---
-
 Control variables are usually easy to identify. In this example, the control variables are `\(c_t, s_t\)`.
-
---
 
 .full-width[.content-box-blue[**State variables** are:
 - Predetermined - the agent can observe the values for the state variables at time `\(t\)` prior to making a decision.
 - Relevant - the value of state variables affect the agent's choices and utility.
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.
 ]]
-
---
 
 State variables are more difficult to identify. In this example, there is an endogenous state variable `\(s_{t-1}\)` and an exogenous state variable `\(y_{t}\)`.
 
@@ -333,7 +327,8 @@ In our overlapping generations model, we will use a method known as Value Functi
 
 ---
 # Summary
-We used the 6-step process to solve the representative household's maximisation problem and found the equilibrium conditions that characterize the paths for consumption and savings.
+We used the 6-step process to solve the individual household's maximisation problem and found the equilibrium conditions that characterize the paths for consumption and savings.
+
 1. Identifying control and state variables
 
 2. Set-up the Bellman Equation
@@ -439,8 +434,6 @@ Recall that:
 - Predetermined - the agent can observe the values for the state variables at time `\(t\)` prior to making a decision.
 - Relevant - the value of state variables affect the agent's choices and utility.
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.]]
-
---
 
 - The control variables are: `\({c_t, n_t, a_t}\)`.
 - The state variables are: `\(a_{t-1}, A_{t}\)`.
@@ -571,9 +564,7 @@ Note that while we had 2 market clearing conditions: `\(y_{t} = c_{t}\)` and `\(
 - Textbooks give more rigorous treatment. Most self-contained but maths more complicated; in particular knowledge of real analysis and measure theory is useful. Stokey, Lucas with Prescott gives the most complete treatment of discounted stationary dynamic programming problems - but does require some familiarity with real analysis and measure theory, so I recommend to check Acemoglu's book first.
 
 ---
-# Practice
-.panelset[
-.panel[.panel-name[Problem]
+# Practice Problem
 Consider the Brock-Mirman optimal growth model with stochastic shocks. The social planner chooses the paths for consumption and capital to maximise 
 `$$\mathbb{E}_{t}\left\{\sum_{\tau=t}^{\infty}\beta^{\tau-t} \ln{c_{\tau}} \right\}$$`
 subject to 
@@ -581,9 +572,9 @@ subject to
 `\(k_{t}\)` given, `\(A &gt; 0, 0 &lt; \alpha &lt; 1\)`, where `\(\{\theta_{t}\}\)` is an i.i.d. sequence with `\(\ln{\theta_{t}}\)` distributed `\(\mathcal{N}(0, \sigma^2)\)`.
 
 - Derive the conditions of the equilibrium of this economy.
-]
 
-.panel[.panel-name[Solution]
+---
+# Practice Solution
 The equilibrium is characterised by sequences `\(\{c_{\tau}, k_{\tau+1}\}_{\tau=t}^{\infty}\)` that satisfy:
 
 $$
@@ -593,9 +584,6 @@ $$
     &amp; \lim_{T \to \infty} \beta^{T} \mathbb{E}_{t}\left[\frac{ k_{T}^{\alpha}\theta_{T}}{c_{T}}\right] = 0 \tag{TVC}
 \end{align}`
 $$
-]
-]
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
