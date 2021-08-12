@@ -24,7 +24,6 @@ MathJax.Hub.Config({
 ```{r setup, echo=FALSE}
 xaringanExtra::use_tile_view()
 xaringanExtra::use_scribble()
-xaringanExtra::use_panelset()
 ```
 
 # Introduction
