@@ -9,6 +9,12 @@
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
     <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <link href="libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.2.6/panelset.js"></script>
     <link rel="stylesheet" href="mtheme.css" type="text/css" />
     <link rel="stylesheet" href="fonts_mtheme.css" type="text/css" />
   </head>
@@ -558,7 +564,9 @@ Note that while we had 2 market clearing conditions: `\(y_{t} = c_{t}\)` and `\(
 - Textbooks give more rigorous treatment. Most self-contained but maths more complicated; in particular knowledge of real analysis and measure theory is useful. Stokey, Lucas with Prescott gives the most complete treatment of discounted stationary dynamic programming problems - but does require some familiarity with real analysis and measure theory, so I recommend to check Acemoglu's book first.
 
 ---
-# Practice Problem
+# Practice
+.panelset[
+.panel[.panel-name[Problem]
 Consider the Brock-Mirman optimal growth model with stochastic shocks. The social planner chooses the paths for consumption and capital to maximise 
 `$$\mathbb{E}_{t}\left\{\sum_{\tau=t}^{\infty}\beta^{\tau-t} \ln{c_{\tau}} \right\}$$`
 subject to 
@@ -566,9 +574,9 @@ subject to
 `\(k_{t}\)` given, `\(A &gt; 0, 0 &lt; \alpha &lt; 1\)`, where `\(\{\theta_{t}\}\)` is an i.i.d. sequence with `\(\ln{\theta_{t}}\)` distributed `\(\mathcal{N}(0, \sigma^2)\)`.
 
 - Derive the conditions of the equilibrium of this economy.
+]
 
----
-# Practice Solution
+.panel[.panel-name[Solution]
 The equilibrium is characterised by sequences `\(\{c_{\tau}, k_{\tau+1}\}_{\tau=t}^{\infty}\)` that satisfy:
 
 $$
@@ -578,6 +586,8 @@ $$
     &amp; \lim_{T \to \infty} \beta^{T} \mathbb{E}_{t}\left[\frac{ k_{T}^{\alpha}\theta_{T}}{c_{T}}\right] = 0 \tag{TVC}
 \end{align}`
 $$
+]
+]
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
