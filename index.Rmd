@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      
 ---
 
 <script type="text/x-mathjax-config">
@@ -29,9 +30,9 @@ xaringanExtra::use_panelset()
 # Introduction
 
 ### Dynamic Stochastic General Equilibrium (DSGE):
-- *Dynamic* - Inter-temporal problems and agents rationally form expectations
-- *Stochastic* -  Allow for exogenous stochastic processes such as random shocks
-- *General Equilibrium* - Agents are utility maximising and markets are in equilibrium
+- *Dynamic* - Takes into account time
+- *Stochastic* -  Allow for uncertain events
+- *General Equilibrium* - Whole system, not individual components.
 
 ### Motivation
 - Popular in macroeconomics research
@@ -47,15 +48,18 @@ xaringanExtra::use_panelset()
 
 ???
 ### Definition
-DSGE stands for Dynamic Stochastic General Equilibrium. Break down definition.
+DSGE stands for Dynamic Stochastic General Equilibrium. Let's break down these characteristics.
+- The models are *Dynamic* which simply means that the models take into account time. This allows us to consider differences between long-run and short-run effects.
+- The models are *Stochastic* which means that the models allow for uncertain events which may naturally occur.
+- Finally, *General Equilibrium* means that we take into consideration the whole system rather than focussing only on individual components.
 
 ### Motivation
-- DSGE models are widely used in macroeconomic research and appear in almost every substantive area of macroeconomics, such as the theory of investment, the theory of the consumer, search theory, public finance, growth theory and most importantly, they appear in the overlapping generations model for life-cycle consumption and housing demand that Matt and I are working on. One of the reasons that DSGE models are attractive is that these models are derived from micro foundations - that is households with rational expectations maximizing utility, firms maximize profits, in general equilibrium. 
+- DSGE models are a popular modelling framework that widely used in macroeconomic research. They appear in almost every substantive area of macroeconomics, such as the theory of investment, the theory of the consumer, search theory, public finance, growth theory and most importantly, they appear in the overlapping generations model for life-cycle consumption and housing demand that Matt and I are working on. One of the reasons that DSGE models are attractive is that these models are derived from micro foundations - that is households with rational expectations maximizing utility, firms maximize profits, in general equilibrium. 
 
 - DSGE models can be used to explain and predict co-movements of aggregate time series over the business cycle as well as to perform policy analysis. DSGE models are also a prominent tool for forecasting - almost every central bank has some DSGE model, such as the Bank of England's COMPASS. Therefore, it's useful to understand how these models work.
 
 ### Aim
-The aim of this teach-in is to give an introduction to DSGE modelling. At the end of this teach-in, you should be able to derive simple DSGE models analytically. Technical mathematical details are omitted, but useful resources are provided at the end for further reading. 
+The aim of this teach-in is to give an introduction to DSGE modelling, with particular emphasis on dynamic programming methods. At the end of this teach-in, you should be able to derive simple DSGE models analytically. I'll be semi-rigorous in my approach, and try to avoid overly technical details. I also won't be able to cover everything related to DSGE models, but I've provided some useful resources at the end that give a more rigorous treatment. 
 
 ### Prerequisites
 No prerequisites are required but some basic knowledge of convex optimisation, in particular the method of Lagrangian multipliers is useful.
@@ -101,7 +105,7 @@ No prerequisites are required but some basic knowledge of convex optimisation, i
 
 ???
 ### Overview
-There are many types of DSGE model structures and I'll talk briefly about some of these structures and their relative advantages and disadvantages. The methods required for solving these models also differ by model structure.
+I'll start with an overview of DSGE model structures, and their relative modelling strengths.
 
 ### Modelling with Discrete Time or Continuous Time 
 
@@ -109,13 +113,12 @@ To start with, time may be modelled as discrete or continuous. In discrete time 
 
 The advantage of discrete time models is that they are often simpler and more intuitive. However, continuous time models have more analytical tractability - since variables have the nice property of being differentiable.
 
-The method for solving discrete time models recursively is by solving a Bellman equation - which will be discussed in this teach-in. The method for solving continuous time models recursively is by solving a Hamilton-Jacobi-Bellman equation. Given this is an introductory course, I won't be covering this, but I've left some useful resources at the end for further reading.
+The method for solving discrete time models recursively is by solving a Bellman equation - which will be discussed in this teach-in. The method for solving continuous time models recursively won't be covered in this teach-in, but you would solve what is known as a Hamilton-Jacobi-Bellman equation.
 
 ### Modelling with homogeneous agents or heterogeneous agents
 Another model consideration is whether to have homogeneous or heterogeneous agents. For example, if you had a model with homogeneous households, this just means that household preferences are identical, whereas a model with heterogeneous households can allow for differences in household preferences.
 
-The advantage of homogeneous-agent models is that they are simpler. However, this assumption many not be realistic while heterogeneous-agent models can better match the data. Nevertheless, homogeneous-agent models aren't useless, these models are useful in answering questions pertaining to the aggregate economy. Incorporating heterogeneity allows us to answer questions on distributional impacts. In this introductory teach-in, we'll only cover methods for solving homogeneous-agent models, but I've left some useful resources at the end for further reading.
-
+The advantage of homogeneous-agent models is that they are simpler. However, this assumption many not be realistic while heterogeneous-agent models can better match the data. Nevertheless, homogeneous-agent models aren't useless, these models are useful in answering questions pertaining to the aggregate economy. Incorporating heterogeneity allows us to answer questions on distributional impacts. For simplicity, in this teach-in, we'll only cover methods for solving homogeneous-agent models.
 
 ### Modelling infinite-horizon or finite-horizon
 The final model consideration I'll talk about is whether to model households living indefinitely (over an infinite horizon), or whether they live for a finite amount of time. The infinite horizon assumption is often used for simplicity as infinite horizon models are stationary in nature - the remaining time horizon does not change as we move forward in time - and their characterization can therefore often be obtained more easily than when the time horizon changes over time. Furthermore, macroeconomic models with long time horizon show similar results to infinite-horizon models.
@@ -135,7 +138,8 @@ $$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{\infty}} \sum_{\tau = t}^{\infty} \be
 subject to the budget constraint for each $\tau \geq t$:
 $$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$
 ### Assumptions 
-- $u'>0, u''<0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0$
+- $u'>0, u''<0, \lim_{c \to 0}$
+- $u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0$
 - $s_{\tau} \geq 0$ for all $\tau \geq t$, with $s_{t-1}$ given.
 - Constant interest rate $R > 0$
 - Exogenous deterministic income stream $\{y_{\tau}\}_{\tau = t}^{\infty}$
@@ -144,20 +148,17 @@ We are interested in the equilibrium paths for $\left\{c_{\tau}, s_{\tau}\right\
 
 ???
 ### Assumptions
-- $u'>0, u''<0$ standard assumptions: utility is increasing but marginal utility is decreasing in consumption.
-$\lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0$ Inada conditions are also frequently assumed. The role of these conditions is to ensure the existence of an interior equilibrium. $\lim_{c \to 0} u'(c) = \infty$ implies that the first unit of consumption is infinitely beneficial to the household. $\lim_{c \to \infty} u'(c) = 0$ implies that the marginal utility from consumption is $0$ when consumption is infinite.
+- We'll have some technical assumptions on the utility function. $u'>0, u''<0$ standard assumptions: utility is increasing but marginal utility is decreasing in consumption.
+- The next set of assumptions on the utility function are known as the Inada conditions, which are also frequently assumed. The role of these conditions is to ensure the existence of an interior equilibrium. $\lim_{c \to 0} u'(c) = \infty$ implies that the first unit of consumption is infinitely beneficial to the household. $\lim_{c \to \infty} u'(c) = 0$ implies that the marginal utility from consumption is $0$ when consumption is infinite. The interpretation for this might be that you die of starvation if you consuming nothing, which gives $-\infty$ utility, since dying is very undesirable.
 
-- Savings non-negative. No markets in this model; one-good economy in which the household can either consume or save (e.g. farmer and crops).
-
-- Interest rate $R$ is assumed to be constant. In model with markets, interest rate is endogenously determined through market clearing conditions. No markets here.
+- Savings are non-negative and pay interest. The interest rate $R$ is assumed to be constant. In this model, there are no markets, so households can't borrow. Think of it as a one-good economy in which the household can either consume or save (e.g. farmer and crops).
 
 - Exogenous deterministic income stream
 
-This model is straightforward given there is no uncertainty. Household has a simple problem and must balance the trade-off between consumption and saving. If they consume more today, they have less savings tomorrow, which lowers future consumption. If they save more today, they have more consumption tomorrow but consume less today.
+This model is straightforward given there is no uncertainty. The household has a simple problem and must balance the trade-off between consumption and saving. If they consume more today, they have less savings tomorrow, which lowers future consumption. If they save more today, they have more consumption tomorrow but consume less today.
 
 This maximisation problem can be solved in a number of ways, for example, by setting up an infinite-dimensional Lagrangian. But the most convenient and common way of approaching it is by solving recursively. The major advantage of using recursive methods to solve these problems is that it often gives better economic insights, similar to the logic of comparing today to tomorrow. I will go through a 6-step method to solve these problems recursively.
 
-[Pause for questions on set-up of model]
 ---
 
 # 1. Identifying control and state variables
@@ -191,11 +192,17 @@ $$
     &= \max_{\{c_{t}, s_{t}\}} \left\{u(c_{t}) + \beta V(s_{t}, y_{t+1}) \right\}
 \end{align*}
 $$
-where the maximisation is subject to the same date $t$ budget constraint.
+where the maximisation is subject to the same date $t$ budget constraint:
+$$c_{t} + s_{t} \leq y_{t} + Rs_{t}$$
+
+
+The Bellman equation is a *functional equation* - the unknown is the value function.
 
 ???
 ### Introduction
-Define $V(s_{t-1}, y_{t})$ as the value of the above maximisation given the endogenous state $s_{t-1}$ and exogenous state $y_{t}$. Note that the state variables are the arguments for the value function.
+To write the problem recursively, we'll set up what is known as a Bellman equation. 
+
+Define the value function $V(s_{t-1}, y_{t})$ as the optimal value of the household's constrained maximisation problem as a function of the state variables $s_{t-1}, y_{t}$, which represent the initial conditions at time $t$.
 
 ### Derivation
 - Maximise present-discounted value of lifetime utility.
@@ -203,9 +210,9 @@ Define $V(s_{t-1}, y_{t})$ as the value of the above maximisation given the endo
 - Future utility is independent of today's utility, so we can separate the maximisation into maximising today and future utility.
 - Nice property of infinite horizon models is that they are stationary; that is, after making a decision today, the problem tomorrow becomes the same as the problem today.
 
-The Bellman equation is the value function subject to the budget constraint.
+The Bellman equation is the value function subject to the budget constraint. It is a *functional equation* - this means that the unknown we're solving for is a function, which is the value function.
 
-Useful to write the problem recursively as it simplifies the problem, since we only need to solve one Bellman equation.
+It's useful to write the problem recursively as it simplifies the problem, since we only need to solve one Bellman equation.
 
 ---
 # 3. Solving the Bellman Equation
@@ -248,7 +255,9 @@ $$
 $$
 
 ???
-Control variables are functions of state variables. However, envelope theorem allows us to treat the state variable as an **independent variable** that will not affect the endogenous choice variables. The intuition is that the indirect effects are 0 from the first order conditions with respect to the endogenous choice variables.
+There are two effects when optimising with respect to the state variable. There is the direct effect, which is the change in the value function with respect to previous savings. There is also an indirect effect, which is the change in the optimal choices of control variables - as these are functions of state variables.
+
+The envelope theorem allows us to treat the state variable as an **independent variable** that will not affect the endogenous choice variables. The intuition is that the indirect effects disappear from the first order conditions with respect to the endogenous choice variables.
 
 ---
 # 5. Collect terms
@@ -292,12 +301,14 @@ The unknown variables in our example are the same as our control variables $c_{t
 We have two equations from the household's optimality conditions: the inter-temporal optimality condition for consumption and also the household budget constraint. The inter-temporal optimality condition for consumption is a difference equation, so we need two additional boundary conditions to pin down the levels for consumption: $s_{t-1}$ being given gives an upper bound for $c_{t}$. The transversality condition plays the role of a terminal boundary condition.
 
 ### Transversality condition:
-The intuition for the transversality condition is that an optimality condition and must be satisfied in order for the individual to maximize its inter-temporal utility, by preventing an over-accumulation of savings. 
+The intuition for the transversality condition is that an optimality condition and must be satisfied in order for the individual to maximize its inter-temporal utility, by preventing an over-accumulation of savings. In a finite-horizon version of this model, the transversality condition isn't necessary, as agent's behaving optimally will consume their entire endowment and not save anything. If agents can live infinity, weird things can happen that may result in an over-accumulation of savings.
 
-The transversality condition can be given this interpretation: $Ru'(c_{T})$ is the marginal benefit of an additional inherited unit of savings at date $T$. $Ru'(c_{T}) s_{T-1}$ is the total value of inherited savings at date $T$. Just as the expected present value of last-period savings in the finite-horizon version of this problem must be 0, the expected present value of savings in the infinite horizon must also be 0.
+The transversality condition prevents this and can be given this interpretation: $Ru'(c_{T})$ is the marginal benefit of an additional inherited unit of savings at date $T$. $Ru'(c_{T}) s_{T-1}$ is the total value of inherited savings at date $T$. Just as the expected present value of last-period savings in the finite-horizon version of this problem must be 0, the expected present value of savings in the infinite horizon must also be 0, which can be seen by taking the limit as $T$ goes to infinity.
 
 ### Numerical Estimation:
-There are many methods - the simplest being Value Function Iteration. The algorithms for solving these models are outside the scope of this course. See Ben Moll's lecture notes for further reading.
+There are many numerical estimation methods, but the algorithms for solving these models are outside the scope of this course. 
+
+In our overlapping generations model, we will use a method known as Value Function Iteration, which will be covered in the next teach-in.
 
 ---
 # Summary
@@ -322,19 +333,23 @@ $$\max_{\{c_{\tau}, s_{\tau}\}_{\tau = t}^{T}} \sum_{\tau = t}^{T} \beta^{\tau -
 subject to the budget constraint for each $t \leq \tau \leq T$:
 $$c_{\tau} + s_{\tau} \leq y_{\tau} + Rs_{\tau-1}$$
 ### Assumptions 
-- $u'>0, u''<0, \lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0$
+- $u'>0, u''<0$
+- $\lim_{c \to 0} u'(c) = \infty, \lim_{c \to \infty} u'(c) = 0$
 - $s_{\tau} \geq 0$ for all $\tau \geq t$
 - Constant interest rate $R$
 - Exogenous deterministic income stream $\{y_{\tau}\}_{\tau = t}^{T}$
 
 We are interested in the equilibrium paths for $\left\{c_{\tau}, s_{\tau}\right\}_{\tau=t}^{T}$ that solve the household optimization problem.
 
+???
+Consider an identical deterministic consumption-saving problem to before, except that the household lives for a finite period of time.
+
 ---
 # Finite horizon dynamic programming
 
 - Value function depends on time $\tau$.
 
-- Backward iteration starting at $\tau = T$
+- Terminal condition at $\tau = T$
 $$
 \begin{align*}
 & V_{T}(s_{T-1}, y_{T}) = \max_{\{c_{T}, s_{T}\}} u(c_{T}) \qquad \text{subject to} \\
@@ -351,7 +366,7 @@ V_{T}(s_{T-1}, y_{T}) &= u(y_{T} + Rs_{T-1})
 \end{align*}
 $$
 
-- Solve same Bellman equation as in infinite-horizon problem:
+- For $t \leq \tau <T$, solve same Bellman equation as in infinite-horizon problem:
 $$
 \begin{align*}
 & V_{t}(s_{t-1}, y_{t}) = \max_{\{c_{t}, s_{t}\}} u(c_{t}) + \beta V_{t+1}(s_{t}, y_{t+1}) \qquad \text{subject to} \\
@@ -359,6 +374,13 @@ $$
 & s_{t} \geq 0 \\
 \end{align*}
 $$
+
+???
+In finite horizon models, the problem is non-stationary, so the value function depends on the time.
+
+In contrast with infinite horizon models, the transversality condition is replaced by a terminal condition, which is the solution to the household maximisation problem in the final period. Here the household has a static optimisation problem, which can easily be solved by observing that households will not save, as there is no incentive for saving in the final period. And so, the household will consume his remaining wealth.
+
+Then, for all other periods, solve the same Bellman equation as the infinite-horizon problem, which will give the same optimality conditions derived earlier. So the only difference between finite and infinite horizon problems is the fact that the transversality condition is replaced by a terminal condition.
 
 ---
 # A more complicated example
@@ -396,6 +418,8 @@ Recall that:
 - Predetermined - the agent can observe the values for the state variables at time $t$ prior to making a decision.
 - Relevant - the value of state variables affect the agent's choices and utility.
 - Not redundant - the information the state variable contains cannot be summarized in a simpler way.]]
+
+--
 
 - The control variables are: ${c_t, n_t, a_t}$.
 - The state variables are: $a_{t-1}, A_{t}$.
@@ -465,7 +489,10 @@ $$\sqrt{c_{t}} = w_{t}$$
 # Firm maximisation problem
 
 The firm has a static maximisation problem:
-$$\max_{\{n_{t}\}} A_{t}n_{t}^{\alpha}-w_{t}n_{t}$$
+\begin{align*}
+& \max_{\{n_{t}\}} \Pi_{i} := y_{t}-w_{t}n_{t} \\
+& \max_{\{n_{t}\}} A_{t}n_{t}^{\alpha}-w_{t}n_{t}
+\end{align*}
 
 First Order Condition:
 $$\alpha A_{t}n_{t}^{\alpha-1}-w_{t} = 0$$
